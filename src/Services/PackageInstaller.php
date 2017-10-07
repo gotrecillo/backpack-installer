@@ -1,0 +1,21 @@
+<?php
+
+namespace Backpack\Install\Services;
+
+use Backpack\Install\Interfaces\Package;
+use League\CLImate\CLImate;
+
+class PackageInstaller
+{
+    private $cli;
+
+    public function __construct(CLImate $cli)
+    {
+        $this->cli = $cli;
+    }
+
+    public function install(Package $package)
+    {
+        $package->install();
+    }
+}
