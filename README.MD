@@ -1,12 +1,12 @@
-#Backpack Installer
+# Backpack Installer
 
-###Install
+### Install
 
 ```bash
 composer global require gotrecillo/backpack-installer --prefer-dist
 ```
 
-###Setup
+### Setup
 
 We can configure it to use a database user to create the database used in the project and execute the migration and initial seeding.
 ```bash
@@ -19,7 +19,7 @@ backpack-installer config:list
 ```
 
 
-###Create a new project
+### Create a new project
 ```bash
 backpack-installer new ProjectName
 ```
