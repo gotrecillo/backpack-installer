@@ -1,21 +1,22 @@
 name: 'Backpack Installer'
 version: 0.0.1
-
+options:
+    databaseUser: root
+    databasePassword: secret
+    developerName: gotrecillo
+    developerLink: gotrecillo.com
+    deleteAuthControllers: true
 packages:
     BackpackSettings: Backpack/Settings
     BackpackLangFileManager: Backpack/LangFileManager
     BackpackLogManager: Backpack/LogManager
     BackpackPageManager: Backpack/PageManager
-    BackpackPageManager: Backpack/PageManager
     BackpackPermissionManager: Backpack/PermissionManager
     BackpackMenusCrud: Backpack/MenusCrud
     BackpackNewsCrud: Backpack/NewsCrud
-    # BackpackBackupManager: Backpack/BackupManager Disabled till it is updated
-
 default_packages:
     BackpackBase: Backpack/Base
     BackpackCrud: Backpack/Crud
-
 dependant_packages:
     BackpackGenerators: Backpack/Generators
     LaracastsGenerators: Laracasts/Generators

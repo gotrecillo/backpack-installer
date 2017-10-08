@@ -8,7 +8,6 @@ use Gotrecillo\BackpackInstaller\Interfaces\HasPublishableAssets;
 
 class BackpackCrud extends Package implements HasPostInstall, HasPublishableAssets, HasMenuItems
 {
-
     public function setup()
     {
         $this->setSlug('backpack/crud');

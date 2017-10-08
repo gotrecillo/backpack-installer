@@ -1,7 +1,7 @@
 {
   "name": "gotrecillo/backpack-installer",
   "bin": [
-    "backpack"
+    "backpack-install"
   ],
   "require": {
     "symfony/console": "^3.3",
@@ -10,8 +10,7 @@
     "symfony/yaml": "^3.3",
     "league/CLImate": "^3.2",
     "league/flysystem": "^1.0",
-    "symfony/process": "^3.3",
-    "vlucas/phpdotenv": "^2.4"
+    "symfony/process": "^3.3"
   },
   "autoload": {
     "psr-4": {

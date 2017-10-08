@@ -28,6 +28,8 @@ class BackpackBase extends Package implements HasPostInstall, HasPublishableAsse
         foreach ($additionalPackages as $package) {
             $this->packageInstaller->install($this->app->make($package));
         }
+
+        $this->runProcess->run($this->artisan->migrateFresh());
     }
 
     public function getPublishableOptions()

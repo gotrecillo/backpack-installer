@@ -6,9 +6,12 @@ use Symfony\Component\Yaml\Yaml;
 
 class Config
 {
+    private $file;
+
     public function __construct()
     {
-        $this->options = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
+        $this->file = __DIR__ . '/config.yml';
+        $this->options = Yaml::parse(file_get_contents($this->file));
     }
 
     public function getName()
@@ -40,5 +43,22 @@ class Config
         return $this->options['default_packages'];
     }
 
+    public function getOptions()
+    {
+        return $this->options['options'];
+    }
 
+    public function getOption($key)
+    {
+        return $this->options['options'][$key];
+    }
+
+    public function updateOption($key, $value)
+    {
+        $this->options['options'][$key] = $value;
+
+        $yaml = Yaml::dump($this->options);
+
+        file_put_contents($this->file, $yaml);
+    }
 }

@@ -117,7 +117,8 @@ class App extends Application
 
         $this->container
             ->add('environment', Environment::class)
-            ->withArgument('fileModifier');
+            ->withArgument('fileModifier')
+            ->withArgument('mountManager');
 
         $this->container
             ->add('provider', Provider::class)

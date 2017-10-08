@@ -6,9 +6,8 @@ use Gotrecillo\BackpackInstaller\Interfaces\HasMenuItems;
 use Gotrecillo\BackpackInstaller\Interfaces\HasPostInstall;
 use Gotrecillo\BackpackInstaller\Interfaces\HasPublishableAssets;
 
-class BackpackMenusCrud extends Package implements HasPublishableAssets, HasMenuItems
+class BackpackMenusCrud extends Package implements HasPublishableAssets, HasMenuItems, HasPostInstall
 {
-
     public function setup()
     {
         $this->setSlug('backpack/menuCRUD');
@@ -34,5 +33,10 @@ class BackpackMenusCrud extends Package implements HasPublishableAssets, HasMenu
         return [
             "<li><a href=\"{{ url(config('backpack.base.route_prefix', 'admin') . '/menu-item') }}\"><i class=\"fa fa-list\"></i> <span>Menu</span></a></li>",
         ];
+    }
+
+    public function postInstall()
+    {
+        $this->runProcess->run($this->artisan->migrate());
     }
 }

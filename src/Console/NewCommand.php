@@ -1,57 +1,17 @@
 <?php
 
-namespace Gotrecillo\BackpackInstaller;
+namespace Gotrecillo\BackpackInstaller\Console;
 
-use Gotrecillo\BackpackInstaller\Config\Config;
 use Gotrecillo\BackpackInstaller\Exceptions\FilesystemException;
 use Gotrecillo\BackpackInstaller\Interfaces\Configurable;
-use Gotrecillo\BackpackInstaller\Services\Composer;
-use Gotrecillo\BackpackInstaller\Services\Customizer;
-use Gotrecillo\BackpackInstaller\Services\PackageInstaller;
-use Gotrecillo\BackpackInstaller\Services\RunProcess;
-use League\CLImate\CLImate;
-use League\Flysystem\MountManager;
-use Symfony\Component\Console\Command\Command;
+use PDO;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class NewCommand extends Command
+class NewCommand extends BaseCommand
 {
-    /**
-     * @var App
-     */
-    protected $app;
-    /**
-     * @var CLImate
-     */
-    protected $cli;
-    /**
-     * @var Config
-     */
-    protected $config;
-    /**
-     * @var MountManager
-     */
-    protected $mountManager;
-    /**
-     * @var Composer
-     */
-    protected $composer;
-    /**
-     * @var Customizer
-     */
-    protected $customizer;
-    /**
-     * @var RunProcess
-     */
-    protected $runProcess;
-    /**
-     * @var PackageInstaller
-     */
-    protected $packageInstaller;
-
     public function configure()
     {
         $this->setName('new')
@@ -70,8 +30,9 @@ class NewCommand extends Command
 
         $this->cli->info("Let's configure the application:");
         $options = $prompt ? $this->getFormResponses() : $this->getDefaultOptions();
+        $database = $this->getDatabaseConfig();
 
-        $this->buildProject($options['packages']);
+        $this->buildProject($options['packages'], $database);
 
         $this->customizer->customize(array_merge(compact('name'), $options));
 
@@ -93,33 +54,20 @@ class NewCommand extends Command
         }
     }
 
-    private function setupCommand()
-    {
-        $this->app = $this->getApplication();
-        $this->app->registerServices();
-        $this->cli = $this->app->make('cli');
-        $this->config = $this->app->make('config');
-        $this->mountManager = $this->app->make('mountManager');
-        $this->composer = $this->app->make('composer');
-        $this->customizer = $this->app->make('customizer');
-        $this->runProcess = $this->app->make('runProcess');
-        $this->packageInstaller = $this->app->make('packageInstaller');
-    }
-
     private function getFormResponses()
     {
         $developer = $this
             ->cli
             ->lightYellow()
             ->input('Developer or company name:')
-            ->defaultTo(getenv('DEVELOPER_NAME'))
+            ->defaultTo($this->config->getOption('developerName'))
             ->prompt();
 
         $website = $this
             ->cli
             ->lightYellow()
             ->input('Developer or company website:')
-            ->defaultTo(getenv('DEVELOPER_LINK'))
+            ->defaultTo($this->config->getOption('developerLink'))
             ->prompt();
 
         $deleteAuthControllers = $this
@@ -127,9 +75,10 @@ class NewCommand extends Command
             ->lightYellow()
             ->confirm('Do you want to remove the laravel default auth controllers?:')
             ->confirmed();
+
         $packages = $this->promptPackages();
 
-        return compact('packages', 'developer', 'website', 'deleteAuthControllers');
+        return compact('packages', 'developer', 'website', 'deleteAuthControllers', 'database');
     }
 
     private function promptPackages()
@@ -145,14 +94,33 @@ class NewCommand extends Command
     private function getDefaultOptions()
     {
         $packages = $this->promptPackages();
-        $developer = getenv('DEVELOPER_NAME');
-        $website = getenv('DEVELOPER_LINK');
-        $deleteAuthControllers = getenv('DELETE_AUTH_CONTROLLERS');
+        $developer = $this->config->getOption('developerName');
+        $website = $this->config->getOption('developerLink');
+        $deleteAuthControllers = $this->config->getOption('deleteAuthControllers');
 
         return compact('packages', 'developer', 'website', 'deleteAuthControllers');
     }
 
-    private function buildProject($packages)
+    private function getDatabaseConfig()
+    {
+        $user = $this->config->getOption('databaseUser');
+        $password = $this->config->getOption('databasePassword');
+
+        do {
+            $database = $this
+                ->cli
+                ->lightYellow()
+                ->input('What database will be used?')->prompt();
+        } while (!$database);
+
+        $connection = new PDO("mysql:host=localhost", $user, $password);
+
+        $connection->exec("CREATE DATABASE `${database}`;");
+
+        return compact('database', 'user', 'password');
+    }
+
+    private function buildProject($packages, $database)
     {
         $packageInstances = [];
 
@@ -166,15 +134,17 @@ class NewCommand extends Command
         }
 
         foreach ($packageInstances as $package) {
-            if($package instanceof Configurable)
-            $package->configure();
+            if ($package instanceof Configurable)
+                $package->configure();
         }
 
         $this->cli->info('Creating application....');
         $command = $this->composer->getCreateProjectCommand();
         $this->runProcess->run($command);
         $this->runProcess->run('chmod -R o+w storage bootstrap/cache');
-
+        $this->environment->updateKey('DB_DATABASE', $database['database']);
+        $this->environment->updateKey('DB_USERNAME', $database['user']);
+        $this->environment->updateKey('DB_PASSWORD', $database['password']);
 
         foreach ($packageInstances as $package) {
             $this->packageInstaller->install($package);

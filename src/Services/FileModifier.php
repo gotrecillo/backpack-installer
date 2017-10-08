@@ -40,6 +40,11 @@ class FileModifier
         $this->mountManager->update($path, $updatedContent);
     }
 
+    public function replaceHook($path, $hook, $newContent)
+    {
+        $this->updateContent($path, $hook, $newContent);
+    }
+
     public function addBeforeHook($path, $hook, $newContent, $padding = 0)
     {
         $padStart = str_repeat(' ', $padding);

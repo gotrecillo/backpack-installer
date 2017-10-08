@@ -8,7 +8,6 @@ use Gotrecillo\BackpackInstaller\Interfaces\HasPublishableAssets;
 
 class BackpackPermissionManager extends Package implements HasPublishableAssets, HasMenuItems, HasPostInstall
 {
-
     public function setup()
     {
         $this->setSlug('backpack/permissionmanager');
@@ -48,5 +47,6 @@ class BackpackPermissionManager extends Package implements HasPublishableAssets,
 
         $this->fileModifier->addAfterHook($userPath, $traitHook, $traits, 4);
         $this->fileModifier->addAfterHook($userPath, $useHook, $uses);
+        $this->runProcess->run($this->artisan->migrate());
     }
 }

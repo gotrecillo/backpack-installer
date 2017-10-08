@@ -16,12 +16,17 @@ class Customizer
      * @var SideBarUpdater
      */
     protected $sideBarUpdater;
+    /**
+     * @var Environment
+     */
+    protected $environment;
 
     public function __construct(App $app)
     {
         $this->app = $app;
         $this->mountManager = $app->make('mountManager');
         $this->sideBarUpdater = $app->make('sideBarUpdater');
+        $this->environment = $app->make('environment');
     }
 
     public function customize($options)
@@ -47,6 +52,8 @@ class Customizer
         ]);
 
         $this->mountManager->update('project://config/backpack/base.php', $baseConfig);
+
+        $this->environment->updateKey('APP_NAME', $options['name']);
     }
 
     private function deleteAuthControllers()
