@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Install\Exceptions;
+namespace Gotrecillo\BackpackInstaller\Exceptions;
 
 use Symfony\Component\Console\Exception\RuntimeException;
 

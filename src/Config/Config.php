@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Install\Config;
+namespace Gotrecillo\BackpackInstaller\Config;
 
 use Symfony\Component\Yaml\Yaml;
 

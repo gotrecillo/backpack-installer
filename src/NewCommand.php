@@ -1,14 +1,14 @@
 <?php
 
-namespace Backpack\Install;
+namespace Gotrecillo\BackpackInstaller;
 
-use Backpack\Install\Config\Config;
-use Backpack\Install\Exceptions\FilesystemException;
-use Backpack\Install\Interfaces\Configurable;
-use Backpack\Install\Services\Composer;
-use Backpack\Install\Services\Customizer;
-use Backpack\Install\Services\PackageInstaller;
-use Backpack\Install\Services\RunProcess;
+use Gotrecillo\BackpackInstaller\Config\Config;
+use Gotrecillo\BackpackInstaller\Exceptions\FilesystemException;
+use Gotrecillo\BackpackInstaller\Interfaces\Configurable;
+use Gotrecillo\BackpackInstaller\Services\Composer;
+use Gotrecillo\BackpackInstaller\Services\Customizer;
+use Gotrecillo\BackpackInstaller\Services\PackageInstaller;
+use Gotrecillo\BackpackInstaller\Services\RunProcess;
 use League\CLImate\CLImate;
 use League\Flysystem\MountManager;
 use Symfony\Component\Console\Command\Command;

@@ -2,15 +2,15 @@
 
 <?php
 
-use Backpack\Install\App;
+use Gotrecillo\BackpackInstaller\App;
 
 require 'vendor/autoload.php';
 
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-$app = new App(new \Backpack\Install\Config\Config(), new \League\Container\Container());
+$app = new App(new \Gotrecillo\BackpackInstaller\Config\Config(), new \League\Container\Container());
 
-$app->addCommands([new \Backpack\Install\NewCommand]);
+$app->addCommands([new \Gotrecillo\BackpackInstaller\NewCommand]);
 
 $app->run();

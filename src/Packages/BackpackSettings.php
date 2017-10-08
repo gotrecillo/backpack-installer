@@ -1,9 +1,9 @@
 <?php
 
-namespace Backpack\Install\Packages;
+namespace Gotrecillo\BackpackInstaller\Packages;
 
-use Backpack\Install\Interfaces\HasMenuItems;
-use Backpack\Install\Interfaces\HasPublishableAssets;
+use Gotrecillo\BackpackInstaller\Interfaces\HasMenuItems;
+use Gotrecillo\BackpackInstaller\Interfaces\HasPublishableAssets;
 
 class BackpackSettings extends Package implements HasPublishableAssets, HasMenuItems
 {

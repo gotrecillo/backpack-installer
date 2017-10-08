@@ -1,21 +1,21 @@
 <?php
 
-namespace Backpack\Install\Packages;
+namespace Gotrecillo\BackpackInstaller\Packages;
 
-use Backpack\Install\App;
-use Backpack\Install\Interfaces\HasEnvironmentVars;
-use Backpack\Install\Interfaces\HasMenuItems;
-use Backpack\Install\Interfaces\HasPostInstall;
-use Backpack\Install\Interfaces\HasPublishableAssets;
-use Backpack\Install\Interfaces\Package as PackageInterface;
-use Backpack\Install\Services\Artisan;
-use Backpack\Install\Services\Composer;
-use Backpack\Install\Services\Environment;
-use Backpack\Install\Services\FileModifier;
-use Backpack\Install\Services\PackageInstaller;
-use Backpack\Install\Services\Provider;
-use Backpack\Install\Services\RunProcess;
-use Backpack\Install\Services\SideBarUpdater;
+use Gotrecillo\BackpackInstaller\App;
+use Gotrecillo\BackpackInstaller\Interfaces\HasEnvironmentVars;
+use Gotrecillo\BackpackInstaller\Interfaces\HasMenuItems;
+use Gotrecillo\BackpackInstaller\Interfaces\HasPostInstall;
+use Gotrecillo\BackpackInstaller\Interfaces\HasPublishableAssets;
+use Gotrecillo\BackpackInstaller\Interfaces\Package as PackageInterface;
+use Gotrecillo\BackpackInstaller\Services\Artisan;
+use Gotrecillo\BackpackInstaller\Services\Composer;
+use Gotrecillo\BackpackInstaller\Services\Environment;
+use Gotrecillo\BackpackInstaller\Services\FileModifier;
+use Gotrecillo\BackpackInstaller\Services\PackageInstaller;
+use Gotrecillo\BackpackInstaller\Services\Provider;
+use Gotrecillo\BackpackInstaller\Services\RunProcess;
+use Gotrecillo\BackpackInstaller\Services\SideBarUpdater;
 use League\CLImate\CLImate;
 use League\Flysystem\MountManager;
 

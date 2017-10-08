@@ -1,18 +1,18 @@
 <?php
 
-namespace Backpack\Install;
+namespace Gotrecillo\BackpackInstaller;
 
-use Backpack\Install\Config\Config;
-use Backpack\Install\Exceptions\ClassDoesNotExist;
-use Backpack\Install\Services\Artisan;
-use Backpack\Install\Services\Composer;
-use Backpack\Install\Services\Customizer;
-use Backpack\Install\Services\Environment;
-use Backpack\Install\Services\FileModifier;
-use Backpack\Install\Services\PackageInstaller;
-use Backpack\Install\Services\Provider;
-use Backpack\Install\Services\RunProcess;
-use Backpack\Install\Services\SideBarUpdater;
+use Gotrecillo\BackpackInstaller\Config\Config;
+use Gotrecillo\BackpackInstaller\Exceptions\ClassDoesNotExist;
+use Gotrecillo\BackpackInstaller\Services\Artisan;
+use Gotrecillo\BackpackInstaller\Services\Composer;
+use Gotrecillo\BackpackInstaller\Services\Customizer;
+use Gotrecillo\BackpackInstaller\Services\Environment;
+use Gotrecillo\BackpackInstaller\Services\FileModifier;
+use Gotrecillo\BackpackInstaller\Services\PackageInstaller;
+use Gotrecillo\BackpackInstaller\Services\Provider;
+use Gotrecillo\BackpackInstaller\Services\RunProcess;
+use Gotrecillo\BackpackInstaller\Services\SideBarUpdater;
 use League\CLImate\CLImate;
 use League\Container\Container;
 use League\Flysystem\Adapter\Local;
@@ -129,7 +129,7 @@ class App extends Application
     private function registerPackages($packages)
     {
         foreach ($packages as $package => $label) {
-            $className = $this->getClassName('Backpack\\Install\\Packages\\', $package);
+            $className = $this->getClassName('Gotrecillo\\BackpackInstaller\\Packages\\', $package);
 
             $this->container
                 ->add($package, $className)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Install\Packages;
+namespace Gotrecillo\BackpackInstaller\Packages;
 
 class LaracastsGenerators extends Package
 {

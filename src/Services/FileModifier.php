@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Install\Services;
+namespace Gotrecillo\BackpackInstaller\Services;
 
 use League\Flysystem\MountManager;
 

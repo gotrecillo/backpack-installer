@@ -1,8 +1,8 @@
 <?php
 
-namespace Backpack\Install\Services;
+namespace Gotrecillo\BackpackInstaller\Services;
 
-use Backpack\Install\App;
+use Gotrecillo\BackpackInstaller\App;
 use League\Flysystem\MountManager;
 
 class Customizer

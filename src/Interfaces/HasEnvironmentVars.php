@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Install\Interfaces;
+namespace Gotrecillo\BackpackInstaller\Interfaces;
 
 interface HasEnvironmentVars
 {

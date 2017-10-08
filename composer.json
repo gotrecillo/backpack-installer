@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Backpack\\Install\\": "src"
+      "Gotrecillo\\BackpackInstaller\\": "src"
     }
   },
   "authors": [

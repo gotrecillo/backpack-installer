@@ -1,8 +1,8 @@
 <?php
 
-namespace Backpack\Install\Services;
+namespace Gotrecillo\BackpackInstaller\Services;
 
-use Backpack\Install\Interfaces\Package;
+use Gotrecillo\BackpackInstaller\Interfaces\Package;
 use League\CLImate\CLImate;
 
 class PackageInstaller

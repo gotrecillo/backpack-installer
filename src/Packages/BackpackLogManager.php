@@ -1,11 +1,11 @@
 <?php
 
-namespace Backpack\Install\Packages;
+namespace Gotrecillo\BackpackInstaller\Packages;
 
-use Backpack\Install\Interfaces\Configurable;
-use Backpack\Install\Interfaces\HasEnvironmentVars;
-use Backpack\Install\Interfaces\HasMenuItems;
-use Backpack\Install\Interfaces\HasPostInstall;
+use Gotrecillo\BackpackInstaller\Interfaces\Configurable;
+use Gotrecillo\BackpackInstaller\Interfaces\HasEnvironmentVars;
+use Gotrecillo\BackpackInstaller\Interfaces\HasMenuItems;
+use Gotrecillo\BackpackInstaller\Interfaces\HasPostInstall;
 
 class BackpackLogManager extends Package implements HasMenuItems, HasPostInstall, HasEnvironmentVars, Configurable
 {

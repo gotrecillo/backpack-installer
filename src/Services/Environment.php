@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Backpack\Install\Services;
+namespace Gotrecillo\BackpackInstaller\Services;
 
 
 class Environment
